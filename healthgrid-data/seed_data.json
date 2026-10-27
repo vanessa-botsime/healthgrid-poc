@@ -1,0 +1,1957 @@
+{
+ "payers": [
+  {
+   "payer_id": "PAY-001",
+   "name": "Harmony Care HMO",
+   "type": "HMO",
+   "country": "NG",
+   "status": "active"
+  },
+  {
+   "payer_id": "PAY-002",
+   "name": "Sunrise Health Insurance",
+   "type": "INSURER",
+   "country": "NG",
+   "status": "active"
+  },
+  {
+   "payer_id": "PAY-003",
+   "name": "Unity Micro-Health Cooperative",
+   "type": "HMO",
+   "country": "NG",
+   "status": "active"
+  }
+ ],
+ "plans": [
+  {
+   "plan_id": "PLN-001",
+   "payer_id": "PAY-001",
+   "name": "Harmony Essential",
+   "tier": "basic",
+   "annual_limit_ngn": 500000,
+   "requires_auth_above_ngn": 50000
+  },
+  {
+   "plan_id": "PLN-002",
+   "payer_id": "PAY-001",
+   "name": "Harmony Family Plus",
+   "tier": "standard",
+   "annual_limit_ngn": 1500000,
+   "requires_auth_above_ngn": 100000
+  },
+  {
+   "plan_id": "PLN-003",
+   "payer_id": "PAY-002",
+   "name": "Sunrise Corporate Gold",
+   "tier": "premium",
+   "annual_limit_ngn": 5000000,
+   "requires_auth_above_ngn": 250000
+  },
+  {
+   "plan_id": "PLN-004",
+   "payer_id": "PAY-002",
+   "name": "Sunrise Individual",
+   "tier": "basic",
+   "annual_limit_ngn": 600000,
+   "requires_auth_above_ngn": 50000
+  },
+  {
+   "plan_id": "PLN-005",
+   "payer_id": "PAY-003",
+   "name": "Unity Micro Cover",
+   "tier": "micro",
+   "annual_limit_ngn": 150000,
+   "requires_auth_above_ngn": 20000
+  },
+  {
+   "plan_id": "PLN-006",
+   "payer_id": "PAY-003",
+   "name": "Unity Micro Family",
+   "tier": "micro",
+   "annual_limit_ngn": 300000,
+   "requires_auth_above_ngn": 30000
+  }
+ ],
+ "plan_services": [
+  {
+   "plan_id": "PLN-001",
+   "service_category": "outpatient_consultation",
+   "covered": 1,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-001",
+   "service_category": "laboratory",
+   "covered": 1,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-001",
+   "service_category": "imaging",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-001",
+   "service_category": "maternity",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-001",
+   "service_category": "surgery",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-001",
+   "service_category": "specialist_consultation",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-001",
+   "service_category": "inpatient_admission",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-001",
+   "service_category": "physiotherapy",
+   "covered": 0,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-001",
+   "service_category": "dental",
+   "covered": 0,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-002",
+   "service_category": "outpatient_consultation",
+   "covered": 1,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-002",
+   "service_category": "laboratory",
+   "covered": 1,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-002",
+   "service_category": "imaging",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-002",
+   "service_category": "maternity",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-002",
+   "service_category": "surgery",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-002",
+   "service_category": "specialist_consultation",
+   "covered": 1,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-002",
+   "service_category": "inpatient_admission",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-002",
+   "service_category": "physiotherapy",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-002",
+   "service_category": "dental",
+   "covered": 1,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-003",
+   "service_category": "outpatient_consultation",
+   "covered": 1,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-003",
+   "service_category": "laboratory",
+   "covered": 1,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-003",
+   "service_category": "imaging",
+   "covered": 1,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-003",
+   "service_category": "maternity",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-003",
+   "service_category": "surgery",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-003",
+   "service_category": "specialist_consultation",
+   "covered": 1,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-003",
+   "service_category": "inpatient_admission",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-003",
+   "service_category": "physiotherapy",
+   "covered": 1,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-003",
+   "service_category": "dental",
+   "covered": 1,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-004",
+   "service_category": "outpatient_consultation",
+   "covered": 1,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-004",
+   "service_category": "laboratory",
+   "covered": 1,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-004",
+   "service_category": "imaging",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-004",
+   "service_category": "maternity",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-004",
+   "service_category": "surgery",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-004",
+   "service_category": "specialist_consultation",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-004",
+   "service_category": "inpatient_admission",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-004",
+   "service_category": "physiotherapy",
+   "covered": 0,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-004",
+   "service_category": "dental",
+   "covered": 0,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-005",
+   "service_category": "outpatient_consultation",
+   "covered": 1,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-005",
+   "service_category": "laboratory",
+   "covered": 1,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-005",
+   "service_category": "imaging",
+   "covered": 0,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-005",
+   "service_category": "maternity",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-005",
+   "service_category": "surgery",
+   "covered": 0,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-005",
+   "service_category": "specialist_consultation",
+   "covered": 0,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-005",
+   "service_category": "inpatient_admission",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-005",
+   "service_category": "physiotherapy",
+   "covered": 0,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-005",
+   "service_category": "dental",
+   "covered": 0,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-006",
+   "service_category": "outpatient_consultation",
+   "covered": 1,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-006",
+   "service_category": "laboratory",
+   "covered": 1,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-006",
+   "service_category": "imaging",
+   "covered": 0,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-006",
+   "service_category": "maternity",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-006",
+   "service_category": "surgery",
+   "covered": 0,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-006",
+   "service_category": "specialist_consultation",
+   "covered": 0,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-006",
+   "service_category": "inpatient_admission",
+   "covered": 1,
+   "requires_auth": 1
+  },
+  {
+   "plan_id": "PLN-006",
+   "service_category": "physiotherapy",
+   "covered": 0,
+   "requires_auth": 0
+  },
+  {
+   "plan_id": "PLN-006",
+   "service_category": "dental",
+   "covered": 0,
+   "requires_auth": 0
+  }
+ ],
+ "providers": [
+  {
+   "provider_id": "PRV-001",
+   "name": "Lagoon View General Hospital",
+   "facility_type": "hospital",
+   "city": "Lagos",
+   "state": "Lagos",
+   "status": "active"
+  },
+  {
+   "provider_id": "PRV-002",
+   "name": "Ikeja Family Clinic",
+   "facility_type": "clinic",
+   "city": "Ikeja",
+   "state": "Lagos",
+   "status": "active"
+  },
+  {
+   "provider_id": "PRV-003",
+   "name": "Central Diagnostics Lab",
+   "facility_type": "laboratory",
+   "city": "Abuja",
+   "state": "FCT",
+   "status": "active"
+  },
+  {
+   "provider_id": "PRV-004",
+   "name": "Garki Specialist Centre",
+   "facility_type": "hospital",
+   "city": "Abuja",
+   "state": "FCT",
+   "status": "active"
+  },
+  {
+   "provider_id": "PRV-005",
+   "name": "Ibadan Mother & Child Clinic",
+   "facility_type": "clinic",
+   "city": "Ibadan",
+   "state": "Oyo",
+   "status": "active"
+  },
+  {
+   "provider_id": "PRV-006",
+   "name": "Port Harcourt Medical Centre",
+   "facility_type": "hospital",
+   "city": "Port Harcourt",
+   "state": "Rivers",
+   "status": "active"
+  },
+  {
+   "provider_id": "PRV-007",
+   "name": "Kano Community Health Post",
+   "facility_type": "primary_care",
+   "city": "Kano",
+   "state": "Kano",
+   "status": "active"
+  },
+  {
+   "provider_id": "PRV-008",
+   "name": "Enugu Imaging & Scan",
+   "facility_type": "imaging_centre",
+   "city": "Enugu",
+   "state": "Enugu",
+   "status": "active"
+  }
+ ],
+ "members": [
+  {
+   "member_id": "SYN-100001",
+   "payer_member_ref": "HMO-100001-2",
+   "first_name": "Adaeze",
+   "last_name": "Okafor",
+   "date_of_birth": "1991-04-12",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 1956",
+   "plan_id": "PLN-002",
+   "status": "active",
+   "effective_from": "2026-01-01",
+   "effective_to": "2026-12-31",
+   "used_amount_ngn": 120000
+  },
+  {
+   "member_id": "SYN-100002",
+   "payer_member_ref": "HMO-100002-4",
+   "first_name": "Chinedu",
+   "last_name": "Eze",
+   "date_of_birth": "1985-09-30",
+   "sex": "M",
+   "phone_masked": "+234 80* *** 6130",
+   "plan_id": "PLN-004",
+   "status": "expired",
+   "effective_from": "2025-01-01",
+   "effective_to": "2025-12-31",
+   "used_amount_ngn": 0
+  },
+  {
+   "member_id": "SYN-100003",
+   "payer_member_ref": "HMO-100003-5",
+   "first_name": "Aisha",
+   "last_name": "Bello",
+   "date_of_birth": "1998-02-05",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 8212",
+   "plan_id": "PLN-005",
+   "status": "active",
+   "effective_from": "2026-03-01",
+   "effective_to": "2027-02-28",
+   "used_amount_ngn": 30000
+  },
+  {
+   "member_id": "SYN-100004",
+   "payer_member_ref": "HMO-100004-1",
+   "first_name": "Tunde",
+   "last_name": "Adeyemi",
+   "date_of_birth": "1979-11-18",
+   "sex": "M",
+   "phone_masked": "+234 80* *** 4121",
+   "plan_id": "PLN-001",
+   "status": "suspended",
+   "effective_from": "2026-01-01",
+   "effective_to": "2026-12-31",
+   "used_amount_ngn": 0
+  },
+  {
+   "member_id": "SYN-100005",
+   "payer_member_ref": "HMO-100005-6",
+   "first_name": "Funmilayo",
+   "last_name": "Balogun",
+   "date_of_birth": "1994-07-22",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 6374",
+   "plan_id": "PLN-006",
+   "status": "active",
+   "effective_from": "2026-02-01",
+   "effective_to": "2027-01-31",
+   "used_amount_ngn": 285000
+  },
+  {
+   "member_id": "SYN-100006",
+   "payer_member_ref": "HMO-100006-3",
+   "first_name": "Ibrahim",
+   "last_name": "Abubakar",
+   "date_of_birth": "1988-05-09",
+   "sex": "M",
+   "phone_masked": "+234 80* *** 4782",
+   "plan_id": "PLN-003",
+   "status": "active",
+   "effective_from": "2026-01-01",
+   "effective_to": "2026-12-31",
+   "used_amount_ngn": 400000
+  },
+  {
+   "member_id": "SYN-100007",
+   "payer_member_ref": "HMO-100007-2",
+   "first_name": "Ngozi",
+   "last_name": "Nwosu",
+   "date_of_birth": "2001-12-01",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 5837",
+   "plan_id": "PLN-002",
+   "status": "pending",
+   "effective_from": "2026-11-01",
+   "effective_to": "2027-10-31",
+   "used_amount_ngn": 0
+  },
+  {
+   "member_id": "SYN-100008",
+   "payer_member_ref": "HMO-100008-1",
+   "first_name": "Chiamaka",
+   "last_name": "Adebayo",
+   "date_of_birth": "1990-11-28",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 0944",
+   "plan_id": "PLN-001",
+   "status": "expired",
+   "effective_from": "2025-09-01",
+   "effective_to": "2026-08-31",
+   "used_amount_ngn": 220000
+  },
+  {
+   "member_id": "SYN-100009",
+   "payer_member_ref": "HMO-100009-1",
+   "first_name": "Ikenna",
+   "last_name": "Ibekwe",
+   "date_of_birth": "1973-01-20",
+   "sex": "M",
+   "phone_masked": "+234 80* *** 7155",
+   "plan_id": "PLN-001",
+   "status": "active",
+   "effective_from": "2026-02-01",
+   "effective_to": "2027-01-31",
+   "used_amount_ngn": 235000
+  },
+  {
+   "member_id": "SYN-100010",
+   "payer_member_ref": "HMO-100010-4",
+   "first_name": "Yetunde",
+   "last_name": "Suleiman",
+   "date_of_birth": "2001-06-07",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 0387",
+   "plan_id": "PLN-004",
+   "status": "active",
+   "effective_from": "2026-06-01",
+   "effective_to": "2027-05-31",
+   "used_amount_ngn": 197000
+  },
+  {
+   "member_id": "SYN-100011",
+   "payer_member_ref": "HMO-100011-3",
+   "first_name": "Amarachi",
+   "last_name": "Afolabi",
+   "date_of_birth": "1963-09-18",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 4610",
+   "plan_id": "PLN-003",
+   "status": "active",
+   "effective_from": "2026-03-01",
+   "effective_to": "2027-02-28",
+   "used_amount_ngn": 2704000
+  },
+  {
+   "member_id": "SYN-100012",
+   "payer_member_ref": "HMO-100012-1",
+   "first_name": "Chinedu",
+   "last_name": "Chukwu",
+   "date_of_birth": "1981-08-14",
+   "sex": "M",
+   "phone_masked": "+234 80* *** 5415",
+   "plan_id": "PLN-001",
+   "status": "active",
+   "effective_from": "2026-09-01",
+   "effective_to": "2027-08-31",
+   "used_amount_ngn": 261000
+  },
+  {
+   "member_id": "SYN-100013",
+   "payer_member_ref": "HMO-100013-5",
+   "first_name": "Halima",
+   "last_name": "Adebayo",
+   "date_of_birth": "1996-08-13",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 4744",
+   "plan_id": "PLN-005",
+   "status": "active",
+   "effective_from": "2026-07-01",
+   "effective_to": "2027-06-30",
+   "used_amount_ngn": 73000
+  },
+  {
+   "member_id": "SYN-100014",
+   "payer_member_ref": "HMO-100014-2",
+   "first_name": "Usman",
+   "last_name": "Adebayo",
+   "date_of_birth": "1959-10-08",
+   "sex": "M",
+   "phone_masked": "+234 80* *** 2004",
+   "plan_id": "PLN-002",
+   "status": "active",
+   "effective_from": "2026-09-01",
+   "effective_to": "2027-08-31",
+   "used_amount_ngn": 703000
+  },
+  {
+   "member_id": "SYN-100015",
+   "payer_member_ref": "HMO-100015-2",
+   "first_name": "Amarachi",
+   "last_name": "Oyelaran",
+   "date_of_birth": "1988-03-16",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 4865",
+   "plan_id": "PLN-002",
+   "status": "active",
+   "effective_from": "2026-02-01",
+   "effective_to": "2027-01-31",
+   "used_amount_ngn": 657000
+  },
+  {
+   "member_id": "SYN-100016",
+   "payer_member_ref": "HMO-100016-5",
+   "first_name": "Segun",
+   "last_name": "Suleiman",
+   "date_of_birth": "2003-09-09",
+   "sex": "M",
+   "phone_masked": "+234 80* *** 6826",
+   "plan_id": "PLN-005",
+   "status": "active",
+   "effective_from": "2026-05-01",
+   "effective_to": "2027-04-30",
+   "used_amount_ngn": 71000
+  },
+  {
+   "member_id": "SYN-100017",
+   "payer_member_ref": "HMO-100017-3",
+   "first_name": "Ikenna",
+   "last_name": "Lawal",
+   "date_of_birth": "1985-04-10",
+   "sex": "M",
+   "phone_masked": "+234 80* *** 5224",
+   "plan_id": "PLN-003",
+   "status": "active",
+   "effective_from": "2026-03-01",
+   "effective_to": "2027-02-28",
+   "used_amount_ngn": 2749000
+  },
+  {
+   "member_id": "SYN-100018",
+   "payer_member_ref": "HMO-100018-3",
+   "first_name": "Ikenna",
+   "last_name": "Adebayo",
+   "date_of_birth": "1989-06-07",
+   "sex": "M",
+   "phone_masked": "+234 80* *** 9594",
+   "plan_id": "PLN-003",
+   "status": "active",
+   "effective_from": "2026-08-01",
+   "effective_to": "2027-07-31",
+   "used_amount_ngn": 2144000
+  },
+  {
+   "member_id": "SYN-100019",
+   "payer_member_ref": "HMO-100019-3",
+   "first_name": "Ikenna",
+   "last_name": "Oyelaran",
+   "date_of_birth": "1993-11-02",
+   "sex": "M",
+   "phone_masked": "+234 80* *** 0332",
+   "plan_id": "PLN-003",
+   "status": "active",
+   "effective_from": "2026-02-01",
+   "effective_to": "2027-01-31",
+   "used_amount_ngn": 1838000
+  },
+  {
+   "member_id": "SYN-100020",
+   "payer_member_ref": "HMO-100020-1",
+   "first_name": "Babatunde",
+   "last_name": "Abubakar",
+   "date_of_birth": "1985-12-16",
+   "sex": "M",
+   "phone_masked": "+234 80* *** 8882",
+   "plan_id": "PLN-001",
+   "status": "active",
+   "effective_from": "2026-08-01",
+   "effective_to": "2027-07-31",
+   "used_amount_ngn": 194000
+  },
+  {
+   "member_id": "SYN-100021",
+   "payer_member_ref": "HMO-100021-1",
+   "first_name": "Aisha",
+   "last_name": "Oyelaran",
+   "date_of_birth": "1967-08-01",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 5611",
+   "plan_id": "PLN-001",
+   "status": "active",
+   "effective_from": "2026-09-01",
+   "effective_to": "2027-08-31",
+   "used_amount_ngn": 43000
+  },
+  {
+   "member_id": "SYN-100022",
+   "payer_member_ref": "HMO-100022-5",
+   "first_name": "Aisha",
+   "last_name": "Eze",
+   "date_of_birth": "1997-01-25",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 3234",
+   "plan_id": "PLN-005",
+   "status": "suspended",
+   "effective_from": "2026-06-01",
+   "effective_to": "2027-05-31",
+   "used_amount_ngn": 20000
+  },
+  {
+   "member_id": "SYN-100023",
+   "payer_member_ref": "HMO-100023-5",
+   "first_name": "Chiamaka",
+   "last_name": "Suleiman",
+   "date_of_birth": "2002-12-05",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 9189",
+   "plan_id": "PLN-005",
+   "status": "active",
+   "effective_from": "2026-03-01",
+   "effective_to": "2027-02-28",
+   "used_amount_ngn": 78000
+  },
+  {
+   "member_id": "SYN-100024",
+   "payer_member_ref": "HMO-100024-5",
+   "first_name": "Oluwaseun",
+   "last_name": "Oyelaran",
+   "date_of_birth": "2000-03-05",
+   "sex": "M",
+   "phone_masked": "+234 80* *** 0919",
+   "plan_id": "PLN-005",
+   "status": "active",
+   "effective_from": "2026-07-01",
+   "effective_to": "2027-06-30",
+   "used_amount_ngn": 51000
+  },
+  {
+   "member_id": "SYN-100025",
+   "payer_member_ref": "HMO-100025-4",
+   "first_name": "Ifeoma",
+   "last_name": "Nwosu",
+   "date_of_birth": "1982-01-04",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 1844",
+   "plan_id": "PLN-004",
+   "status": "expired",
+   "effective_from": "2025-01-01",
+   "effective_to": "2025-12-31",
+   "used_amount_ngn": 181000
+  },
+  {
+   "member_id": "SYN-100026",
+   "payer_member_ref": "HMO-100026-3",
+   "first_name": "Ikenna",
+   "last_name": "Okafor",
+   "date_of_birth": "1959-09-16",
+   "sex": "M",
+   "phone_masked": "+234 80* *** 2656",
+   "plan_id": "PLN-003",
+   "status": "active",
+   "effective_from": "2026-08-01",
+   "effective_to": "2027-07-31",
+   "used_amount_ngn": 1367000
+  },
+  {
+   "member_id": "SYN-100027",
+   "payer_member_ref": "HMO-100027-2",
+   "first_name": "Bisola",
+   "last_name": "Ibekwe",
+   "date_of_birth": "1994-10-26",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 2010",
+   "plan_id": "PLN-002",
+   "status": "active",
+   "effective_from": "2026-09-01",
+   "effective_to": "2027-08-31",
+   "used_amount_ngn": 217000
+  },
+  {
+   "member_id": "SYN-100028",
+   "payer_member_ref": "HMO-100028-6",
+   "first_name": "Kelechi",
+   "last_name": "Afolabi",
+   "date_of_birth": "1987-10-08",
+   "sex": "M",
+   "phone_masked": "+234 80* *** 1937",
+   "plan_id": "PLN-006",
+   "status": "active",
+   "effective_from": "2026-09-01",
+   "effective_to": "2027-08-31",
+   "used_amount_ngn": 104000
+  },
+  {
+   "member_id": "SYN-100029",
+   "payer_member_ref": "HMO-100029-1",
+   "first_name": "Aisha",
+   "last_name": "Abubakar",
+   "date_of_birth": "1960-11-18",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 0611",
+   "plan_id": "PLN-001",
+   "status": "active",
+   "effective_from": "2026-04-01",
+   "effective_to": "2027-03-31",
+   "used_amount_ngn": 253000
+  },
+  {
+   "member_id": "SYN-100030",
+   "payer_member_ref": "HMO-100030-2",
+   "first_name": "Ngozi",
+   "last_name": "Adebayo",
+   "date_of_birth": "1971-09-05",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 2059",
+   "plan_id": "PLN-002",
+   "status": "active",
+   "effective_from": "2026-03-01",
+   "effective_to": "2027-02-28",
+   "used_amount_ngn": 408000
+  },
+  {
+   "member_id": "SYN-100031",
+   "payer_member_ref": "HMO-100031-3",
+   "first_name": "Obinna",
+   "last_name": "Onyeka",
+   "date_of_birth": "1984-02-13",
+   "sex": "M",
+   "phone_masked": "+234 80* *** 8562",
+   "plan_id": "PLN-003",
+   "status": "active",
+   "effective_from": "2026-03-01",
+   "effective_to": "2027-02-28",
+   "used_amount_ngn": 1104000
+  },
+  {
+   "member_id": "SYN-100032",
+   "payer_member_ref": "HMO-100032-3",
+   "first_name": "Babatunde",
+   "last_name": "Oyelaran",
+   "date_of_birth": "1976-08-06",
+   "sex": "M",
+   "phone_masked": "+234 80* *** 5800",
+   "plan_id": "PLN-003",
+   "status": "active",
+   "effective_from": "2026-08-01",
+   "effective_to": "2027-07-31",
+   "used_amount_ngn": 503000
+  },
+  {
+   "member_id": "SYN-100033",
+   "payer_member_ref": "HMO-100033-1",
+   "first_name": "Femi",
+   "last_name": "Eze",
+   "date_of_birth": "1971-04-01",
+   "sex": "M",
+   "phone_masked": "+234 80* *** 9780",
+   "plan_id": "PLN-001",
+   "status": "expired",
+   "effective_from": "2025-06-01",
+   "effective_to": "2026-05-31",
+   "used_amount_ngn": 213000
+  },
+  {
+   "member_id": "SYN-100034",
+   "payer_member_ref": "HMO-100034-6",
+   "first_name": "Adaeze",
+   "last_name": "Chukwu",
+   "date_of_birth": "1968-06-18",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 4951",
+   "plan_id": "PLN-006",
+   "status": "active",
+   "effective_from": "2026-09-01",
+   "effective_to": "2027-08-31",
+   "used_amount_ngn": 56000
+  },
+  {
+   "member_id": "SYN-100035",
+   "payer_member_ref": "HMO-100035-2",
+   "first_name": "Zainab",
+   "last_name": "Okonkwo",
+   "date_of_birth": "1993-10-24",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 0471",
+   "plan_id": "PLN-002",
+   "status": "active",
+   "effective_from": "2026-05-01",
+   "effective_to": "2027-04-30",
+   "used_amount_ngn": 702000
+  },
+  {
+   "member_id": "SYN-100036",
+   "payer_member_ref": "HMO-100036-1",
+   "first_name": "Funmilayo",
+   "last_name": "Okonkwo",
+   "date_of_birth": "1964-07-06",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 6959",
+   "plan_id": "PLN-001",
+   "status": "active",
+   "effective_from": "2026-06-01",
+   "effective_to": "2027-05-31",
+   "used_amount_ngn": 97000
+  },
+  {
+   "member_id": "SYN-100037",
+   "payer_member_ref": "HMO-100037-1",
+   "first_name": "Ifeoma",
+   "last_name": "Afolabi",
+   "date_of_birth": "1975-10-27",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 9472",
+   "plan_id": "PLN-001",
+   "status": "active",
+   "effective_from": "2026-06-01",
+   "effective_to": "2027-05-31",
+   "used_amount_ngn": 84000
+  },
+  {
+   "member_id": "SYN-100038",
+   "payer_member_ref": "HMO-100038-3",
+   "first_name": "Tunde",
+   "last_name": "Bello",
+   "date_of_birth": "1958-07-28",
+   "sex": "M",
+   "phone_masked": "+234 80* *** 2069",
+   "plan_id": "PLN-003",
+   "status": "active",
+   "effective_from": "2026-01-01",
+   "effective_to": "2026-12-31",
+   "used_amount_ngn": 240000
+  },
+  {
+   "member_id": "SYN-100039",
+   "payer_member_ref": "HMO-100039-6",
+   "first_name": "Aisha",
+   "last_name": "Okafor",
+   "date_of_birth": "1977-02-04",
+   "sex": "F",
+   "phone_masked": "+234 80* *** 5832",
+   "plan_id": "PLN-006",
+   "status": "active",
+   "effective_from": "2026-06-01",
+   "effective_to": "2027-05-31",
+   "used_amount_ngn": 82000
+  },
+  {
+   "member_id": "SYN-100040",
+   "payer_member_ref": "HMO-100040-2",
+   "first_name": "Kelechi",
+   "last_name": "Adeyemi",
+   "date_of_birth": "1983-06-20",
+   "sex": "M",
+   "phone_masked": "+234 80* *** 6804",
+   "plan_id": "PLN-002",
+   "status": "active",
+   "effective_from": "2026-07-01",
+   "effective_to": "2027-06-30",
+   "used_amount_ngn": 708000
+  }
+ ],
+ "authorisation_requests": [
+  {
+   "request_id": "AUTH-0001",
+   "member_id": "SYN-100031",
+   "provider_id": "PRV-004",
+   "service_category": "specialist_consultation",
+   "service_description": "ENT review",
+   "requested_date": "2026-11-06",
+   "urgency": "routine",
+   "estimated_cost_ngn": 42000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "approved",
+   "missing_fields": null,
+   "created_at": "2026-10-15T10:11:00",
+   "updated_at": "2026-10-16T07:11:00"
+  },
+  {
+   "request_id": "AUTH-0002",
+   "member_id": "SYN-100032",
+   "provider_id": "PRV-003",
+   "service_category": "surgery",
+   "service_description": "Appendectomy",
+   "requested_date": "2026-11-07",
+   "urgency": "routine",
+   "estimated_cost_ngn": 489000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "approved",
+   "missing_fields": null,
+   "created_at": "2026-10-23T16:30:00",
+   "updated_at": "2026-10-25T00:30:00"
+  },
+  {
+   "request_id": "AUTH-0003",
+   "member_id": "SYN-100010",
+   "provider_id": "PRV-001",
+   "service_category": "maternity",
+   "service_description": "Caesarean section",
+   "requested_date": "2026-11-03",
+   "urgency": "urgent",
+   "estimated_cost_ngn": 420000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "approved",
+   "missing_fields": null,
+   "created_at": "2026-10-14T16:52:00",
+   "updated_at": "2026-10-15T04:52:00"
+  },
+  {
+   "request_id": "AUTH-0004",
+   "member_id": "SYN-100006",
+   "provider_id": "PRV-001",
+   "service_category": "physiotherapy",
+   "service_description": "Back pain physiotherapy",
+   "requested_date": "2026-11-03",
+   "urgency": "urgent",
+   "estimated_cost_ngn": 112000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "approved",
+   "missing_fields": null,
+   "created_at": "2026-10-20T08:14:00",
+   "updated_at": "2026-10-21T03:14:00"
+  },
+  {
+   "request_id": "AUTH-0005",
+   "member_id": "SYN-100019",
+   "provider_id": "PRV-005",
+   "service_category": "inpatient_admission",
+   "service_description": "Admission for observation, 3 days",
+   "requested_date": "2026-11-07",
+   "urgency": "urgent",
+   "estimated_cost_ngn": 270000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "approved",
+   "missing_fields": null,
+   "created_at": "2026-10-22T13:29:00",
+   "updated_at": "2026-10-23T09:29:00"
+  },
+  {
+   "request_id": "AUTH-0006",
+   "member_id": "SYN-100026",
+   "provider_id": "PRV-003",
+   "service_category": "maternity",
+   "service_description": "Antenatal package, 3rd trimester",
+   "requested_date": "2026-10-31",
+   "urgency": "routine",
+   "estimated_cost_ngn": 409000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "approved",
+   "missing_fields": null,
+   "created_at": "2026-10-20T08:22:00",
+   "updated_at": "2026-10-22T23:22:00"
+  },
+  {
+   "request_id": "AUTH-0007",
+   "member_id": "SYN-100010",
+   "provider_id": "PRV-006",
+   "service_category": "surgery",
+   "service_description": "Laparoscopic cholecystectomy",
+   "requested_date": "2026-11-07",
+   "urgency": "routine",
+   "estimated_cost_ngn": 823000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "approved",
+   "missing_fields": null,
+   "created_at": "2026-10-25T09:57:00",
+   "updated_at": "2026-10-26T22:57:00"
+  },
+  {
+   "request_id": "AUTH-0008",
+   "member_id": "SYN-100026",
+   "provider_id": "PRV-001",
+   "service_category": "inpatient_admission",
+   "service_description": "Admission for observation, 3 days",
+   "requested_date": "2026-11-04",
+   "urgency": "routine",
+   "estimated_cost_ngn": 296000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "approved",
+   "missing_fields": null,
+   "created_at": "2026-10-19T10:32:00",
+   "updated_at": "2026-10-19T21:32:00"
+  },
+  {
+   "request_id": "AUTH-0009",
+   "member_id": "SYN-100028",
+   "provider_id": "PRV-005",
+   "service_category": "inpatient_admission",
+   "service_description": "Admission for pneumonia",
+   "requested_date": "2026-11-03",
+   "urgency": "routine",
+   "estimated_cost_ngn": 252000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "approved",
+   "missing_fields": null,
+   "created_at": "2026-10-18T11:10:00",
+   "updated_at": "2026-10-19T17:10:00"
+  },
+  {
+   "request_id": "AUTH-0010",
+   "member_id": "SYN-100013",
+   "provider_id": "PRV-004",
+   "service_category": "specialist_consultation",
+   "service_description": "ENT review",
+   "requested_date": "2026-11-06",
+   "urgency": "routine",
+   "estimated_cost_ngn": 56000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "declined",
+   "missing_fields": null,
+   "created_at": "2026-10-18T15:27:00",
+   "updated_at": "2026-10-20T15:27:00"
+  },
+  {
+   "request_id": "AUTH-0011",
+   "member_id": "SYN-100003",
+   "provider_id": "PRV-006",
+   "service_category": "maternity",
+   "service_description": "Normal delivery",
+   "requested_date": "2026-11-02",
+   "urgency": "routine",
+   "estimated_cost_ngn": 362000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "declined",
+   "missing_fields": null,
+   "created_at": "2026-10-27T09:32:00",
+   "updated_at": "2026-10-28T11:32:00"
+  },
+  {
+   "request_id": "AUTH-0012",
+   "member_id": "SYN-100018",
+   "provider_id": "PRV-003",
+   "service_category": "inpatient_admission",
+   "service_description": "Admission for observation, 3 days",
+   "requested_date": "2026-11-02",
+   "urgency": "routine",
+   "estimated_cost_ngn": 220000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "declined",
+   "missing_fields": null,
+   "created_at": "2026-10-22T15:06:00",
+   "updated_at": "2026-10-23T20:06:00"
+  },
+  {
+   "request_id": "AUTH-0013",
+   "member_id": "SYN-100012",
+   "provider_id": "PRV-008",
+   "service_category": "surgery",
+   "service_description": "Laparoscopic cholecystectomy",
+   "requested_date": "2026-11-05",
+   "urgency": "routine",
+   "estimated_cost_ngn": 772000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "under_review",
+   "missing_fields": null,
+   "created_at": "2026-10-19T11:53:00",
+   "updated_at": "2026-10-19T23:53:00"
+  },
+  {
+   "request_id": "AUTH-0014",
+   "member_id": "SYN-100029",
+   "provider_id": "PRV-002",
+   "service_category": "imaging",
+   "service_description": "Chest X-ray",
+   "requested_date": "2026-11-03",
+   "urgency": "urgent",
+   "estimated_cost_ngn": 48000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "under_review",
+   "missing_fields": null,
+   "created_at": "2026-10-15T12:16:00",
+   "updated_at": "2026-10-15T20:16:00"
+  },
+  {
+   "request_id": "AUTH-0015",
+   "member_id": "SYN-100035",
+   "provider_id": "PRV-006",
+   "service_category": "inpatient_admission",
+   "service_description": "Admission for malaria with complications",
+   "requested_date": "2026-11-01",
+   "urgency": "urgent",
+   "estimated_cost_ngn": 259000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "under_review",
+   "missing_fields": null,
+   "created_at": "2026-10-16T15:25:00",
+   "updated_at": "2026-10-17T02:25:00"
+  },
+  {
+   "request_id": "AUTH-0016",
+   "member_id": "SYN-100037",
+   "provider_id": "PRV-006",
+   "service_category": "maternity",
+   "service_description": "Normal delivery",
+   "requested_date": "2026-11-07",
+   "urgency": "routine",
+   "estimated_cost_ngn": 263000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "under_review",
+   "missing_fields": null,
+   "created_at": "2026-10-15T14:13:00",
+   "updated_at": "2026-10-15T19:13:00"
+  },
+  {
+   "request_id": "AUTH-0017",
+   "member_id": "SYN-100013",
+   "provider_id": "PRV-005",
+   "service_category": "specialist_consultation",
+   "service_description": "Orthopaedic review",
+   "requested_date": "2026-10-31",
+   "urgency": "urgent",
+   "estimated_cost_ngn": 36000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "under_review",
+   "missing_fields": null,
+   "created_at": "2026-10-22T12:53:00",
+   "updated_at": "2026-10-23T03:53:00"
+  },
+  {
+   "request_id": "AUTH-0018",
+   "member_id": "SYN-100023",
+   "provider_id": "PRV-006",
+   "service_category": "maternity",
+   "service_description": "Caesarean section",
+   "requested_date": "2026-11-05",
+   "urgency": "routine",
+   "estimated_cost_ngn": 155000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "submitted",
+   "missing_fields": null,
+   "created_at": "2026-10-26T12:18:00",
+   "updated_at": "2026-10-26T12:18:00"
+  },
+  {
+   "request_id": "AUTH-0019",
+   "member_id": "SYN-100032",
+   "provider_id": "PRV-001",
+   "service_category": "specialist_consultation",
+   "service_description": "Cardiology review",
+   "requested_date": "2026-11-05",
+   "urgency": "routine",
+   "estimated_cost_ngn": 51000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "submitted",
+   "missing_fields": null,
+   "created_at": "2026-10-17T14:21:00",
+   "updated_at": "2026-10-17T14:21:00"
+  },
+  {
+   "request_id": "AUTH-0020",
+   "member_id": "SYN-100018",
+   "provider_id": "PRV-006",
+   "service_category": "specialist_consultation",
+   "service_description": "Orthopaedic review",
+   "requested_date": "2026-11-06",
+   "urgency": "routine",
+   "estimated_cost_ngn": 57000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "submitted",
+   "missing_fields": null,
+   "created_at": "2026-10-21T10:00:00",
+   "updated_at": "2026-10-21T10:00:00"
+  },
+  {
+   "request_id": "AUTH-0021",
+   "member_id": "SYN-100021",
+   "provider_id": "PRV-006",
+   "service_category": "maternity",
+   "service_description": "Normal delivery",
+   "requested_date": "2026-11-03",
+   "urgency": "routine",
+   "estimated_cost_ngn": 383000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "submitted",
+   "missing_fields": null,
+   "created_at": "2026-10-21T15:54:00",
+   "updated_at": "2026-10-21T15:54:00"
+  },
+  {
+   "request_id": "AUTH-0022",
+   "member_id": "SYN-100001",
+   "provider_id": "PRV-004",
+   "service_category": "imaging",
+   "service_description": "Pelvic ultrasound",
+   "requested_date": "2026-10-30",
+   "urgency": "routine",
+   "estimated_cost_ngn": 56000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "more_info_needed",
+   "missing_fields": "[\"referral_letter\"]",
+   "created_at": "2026-10-23T13:01:00",
+   "updated_at": "2026-10-25T14:01:00"
+  },
+  {
+   "request_id": "AUTH-0023",
+   "member_id": "SYN-100017",
+   "provider_id": "PRV-001",
+   "service_category": "inpatient_admission",
+   "service_description": "Admission for malaria with complications",
+   "requested_date": "2026-11-07",
+   "urgency": "routine",
+   "estimated_cost_ngn": 140000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "more_info_needed",
+   "missing_fields": "[\"referral_letter\", \"estimated_cost_ngn\"]",
+   "created_at": "2026-10-24T15:13:00",
+   "updated_at": "2026-10-26T20:13:00"
+  },
+  {
+   "request_id": "AUTH-0024",
+   "member_id": "SYN-100034",
+   "provider_id": "PRV-003",
+   "service_category": "physiotherapy",
+   "service_description": "Back pain physiotherapy",
+   "requested_date": "2026-11-03",
+   "urgency": "routine",
+   "estimated_cost_ngn": 44000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "more_info_needed",
+   "missing_fields": "[\"referral_letter\", \"estimated_cost_ngn\"]",
+   "created_at": "2026-10-21T08:11:00",
+   "updated_at": "2026-10-22T17:11:00"
+  },
+  {
+   "request_id": "AUTH-0025",
+   "member_id": "SYN-100029",
+   "provider_id": "PRV-008",
+   "service_category": "surgery",
+   "service_description": "Appendectomy",
+   "requested_date": "2026-10-29",
+   "urgency": "routine",
+   "estimated_cost_ngn": 517000,
+   "reason": "Clinically indicated per attending physician (synthetic)",
+   "status": "cancelled",
+   "missing_fields": null,
+   "created_at": "2026-10-22T12:02:00",
+   "updated_at": "2026-10-23T04:02:00"
+  }
+ ],
+ "workflow_events": [
+  {
+   "event_id": 1,
+   "request_id": "AUTH-0001",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-15T10:11:00"
+  },
+  {
+   "event_id": 2,
+   "request_id": "AUTH-0001",
+   "actor": "insurer_reviewer",
+   "from_state": "submitted",
+   "to_state": "under_review",
+   "reason": null,
+   "created_at": "2026-10-16T04:11:00"
+  },
+  {
+   "event_id": 3,
+   "request_id": "AUTH-0001",
+   "actor": "insurer_reviewer",
+   "from_state": "under_review",
+   "to_state": "approved",
+   "reason": "Meets plan criteria",
+   "created_at": "2026-10-16T07:11:00"
+  },
+  {
+   "event_id": 4,
+   "request_id": "AUTH-0002",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-23T16:30:00"
+  },
+  {
+   "event_id": 5,
+   "request_id": "AUTH-0002",
+   "actor": "insurer_reviewer",
+   "from_state": "submitted",
+   "to_state": "under_review",
+   "reason": null,
+   "created_at": "2026-10-24T06:30:00"
+  },
+  {
+   "event_id": 6,
+   "request_id": "AUTH-0002",
+   "actor": "insurer_reviewer",
+   "from_state": "under_review",
+   "to_state": "approved",
+   "reason": "Meets plan criteria",
+   "created_at": "2026-10-25T00:30:00"
+  },
+  {
+   "event_id": 7,
+   "request_id": "AUTH-0003",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-14T16:52:00"
+  },
+  {
+   "event_id": 8,
+   "request_id": "AUTH-0003",
+   "actor": "insurer_reviewer",
+   "from_state": "submitted",
+   "to_state": "under_review",
+   "reason": null,
+   "created_at": "2026-10-15T01:52:00"
+  },
+  {
+   "event_id": 9,
+   "request_id": "AUTH-0003",
+   "actor": "insurer_reviewer",
+   "from_state": "under_review",
+   "to_state": "approved",
+   "reason": "Meets plan criteria",
+   "created_at": "2026-10-15T04:52:00"
+  },
+  {
+   "event_id": 10,
+   "request_id": "AUTH-0004",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-20T08:14:00"
+  },
+  {
+   "event_id": 11,
+   "request_id": "AUTH-0004",
+   "actor": "insurer_reviewer",
+   "from_state": "submitted",
+   "to_state": "under_review",
+   "reason": null,
+   "created_at": "2026-10-21T01:14:00"
+  },
+  {
+   "event_id": 12,
+   "request_id": "AUTH-0004",
+   "actor": "insurer_reviewer",
+   "from_state": "under_review",
+   "to_state": "approved",
+   "reason": "Meets plan criteria",
+   "created_at": "2026-10-21T03:14:00"
+  },
+  {
+   "event_id": 13,
+   "request_id": "AUTH-0005",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-22T13:29:00"
+  },
+  {
+   "event_id": 14,
+   "request_id": "AUTH-0005",
+   "actor": "insurer_reviewer",
+   "from_state": "submitted",
+   "to_state": "under_review",
+   "reason": null,
+   "created_at": "2026-10-23T04:29:00"
+  },
+  {
+   "event_id": 15,
+   "request_id": "AUTH-0005",
+   "actor": "insurer_reviewer",
+   "from_state": "under_review",
+   "to_state": "approved",
+   "reason": "Meets plan criteria",
+   "created_at": "2026-10-23T09:29:00"
+  },
+  {
+   "event_id": 16,
+   "request_id": "AUTH-0006",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-20T08:22:00"
+  },
+  {
+   "event_id": 17,
+   "request_id": "AUTH-0006",
+   "actor": "insurer_reviewer",
+   "from_state": "submitted",
+   "to_state": "under_review",
+   "reason": null,
+   "created_at": "2026-10-21T01:22:00"
+  },
+  {
+   "event_id": 18,
+   "request_id": "AUTH-0006",
+   "actor": "insurer_reviewer",
+   "from_state": "under_review",
+   "to_state": "approved",
+   "reason": "Meets plan criteria",
+   "created_at": "2026-10-22T23:22:00"
+  },
+  {
+   "event_id": 19,
+   "request_id": "AUTH-0007",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-25T09:57:00"
+  },
+  {
+   "event_id": 20,
+   "request_id": "AUTH-0007",
+   "actor": "insurer_reviewer",
+   "from_state": "submitted",
+   "to_state": "under_review",
+   "reason": null,
+   "created_at": "2026-10-25T10:57:00"
+  },
+  {
+   "event_id": 21,
+   "request_id": "AUTH-0007",
+   "actor": "insurer_reviewer",
+   "from_state": "under_review",
+   "to_state": "approved",
+   "reason": "Meets plan criteria",
+   "created_at": "2026-10-26T22:57:00"
+  },
+  {
+   "event_id": 22,
+   "request_id": "AUTH-0008",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-19T10:32:00"
+  },
+  {
+   "event_id": 23,
+   "request_id": "AUTH-0008",
+   "actor": "insurer_reviewer",
+   "from_state": "submitted",
+   "to_state": "under_review",
+   "reason": null,
+   "created_at": "2026-10-19T14:32:00"
+  },
+  {
+   "event_id": 24,
+   "request_id": "AUTH-0008",
+   "actor": "insurer_reviewer",
+   "from_state": "under_review",
+   "to_state": "approved",
+   "reason": "Meets plan criteria",
+   "created_at": "2026-10-19T21:32:00"
+  },
+  {
+   "event_id": 25,
+   "request_id": "AUTH-0009",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-18T11:10:00"
+  },
+  {
+   "event_id": 26,
+   "request_id": "AUTH-0009",
+   "actor": "insurer_reviewer",
+   "from_state": "submitted",
+   "to_state": "under_review",
+   "reason": null,
+   "created_at": "2026-10-18T21:10:00"
+  },
+  {
+   "event_id": 27,
+   "request_id": "AUTH-0009",
+   "actor": "insurer_reviewer",
+   "from_state": "under_review",
+   "to_state": "approved",
+   "reason": "Meets plan criteria",
+   "created_at": "2026-10-19T17:10:00"
+  },
+  {
+   "event_id": 28,
+   "request_id": "AUTH-0010",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-18T15:27:00"
+  },
+  {
+   "event_id": 29,
+   "request_id": "AUTH-0010",
+   "actor": "insurer_reviewer",
+   "from_state": "submitted",
+   "to_state": "under_review",
+   "reason": null,
+   "created_at": "2026-10-19T03:27:00"
+  },
+  {
+   "event_id": 30,
+   "request_id": "AUTH-0010",
+   "actor": "insurer_reviewer",
+   "from_state": "under_review",
+   "to_state": "declined",
+   "reason": "Service excluded under plan",
+   "created_at": "2026-10-20T15:27:00"
+  },
+  {
+   "event_id": 31,
+   "request_id": "AUTH-0011",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-27T09:32:00"
+  },
+  {
+   "event_id": 32,
+   "request_id": "AUTH-0011",
+   "actor": "insurer_reviewer",
+   "from_state": "submitted",
+   "to_state": "under_review",
+   "reason": null,
+   "created_at": "2026-10-27T10:32:00"
+  },
+  {
+   "event_id": 33,
+   "request_id": "AUTH-0011",
+   "actor": "insurer_reviewer",
+   "from_state": "under_review",
+   "to_state": "declined",
+   "reason": "Service excluded under plan",
+   "created_at": "2026-10-28T11:32:00"
+  },
+  {
+   "event_id": 34,
+   "request_id": "AUTH-0012",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-22T15:06:00"
+  },
+  {
+   "event_id": 35,
+   "request_id": "AUTH-0012",
+   "actor": "insurer_reviewer",
+   "from_state": "submitted",
+   "to_state": "under_review",
+   "reason": null,
+   "created_at": "2026-10-22T18:06:00"
+  },
+  {
+   "event_id": 36,
+   "request_id": "AUTH-0012",
+   "actor": "insurer_reviewer",
+   "from_state": "under_review",
+   "to_state": "declined",
+   "reason": "Annual limit exceeded",
+   "created_at": "2026-10-23T20:06:00"
+  },
+  {
+   "event_id": 37,
+   "request_id": "AUTH-0013",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-19T11:53:00"
+  },
+  {
+   "event_id": 38,
+   "request_id": "AUTH-0013",
+   "actor": "insurer_reviewer",
+   "from_state": "submitted",
+   "to_state": "under_review",
+   "reason": null,
+   "created_at": "2026-10-19T23:53:00"
+  },
+  {
+   "event_id": 39,
+   "request_id": "AUTH-0014",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-15T12:16:00"
+  },
+  {
+   "event_id": 40,
+   "request_id": "AUTH-0014",
+   "actor": "insurer_reviewer",
+   "from_state": "submitted",
+   "to_state": "under_review",
+   "reason": null,
+   "created_at": "2026-10-15T20:16:00"
+  },
+  {
+   "event_id": 41,
+   "request_id": "AUTH-0015",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-16T15:25:00"
+  },
+  {
+   "event_id": 42,
+   "request_id": "AUTH-0015",
+   "actor": "insurer_reviewer",
+   "from_state": "submitted",
+   "to_state": "under_review",
+   "reason": null,
+   "created_at": "2026-10-17T02:25:00"
+  },
+  {
+   "event_id": 43,
+   "request_id": "AUTH-0016",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-15T14:13:00"
+  },
+  {
+   "event_id": 44,
+   "request_id": "AUTH-0016",
+   "actor": "insurer_reviewer",
+   "from_state": "submitted",
+   "to_state": "under_review",
+   "reason": null,
+   "created_at": "2026-10-15T19:13:00"
+  },
+  {
+   "event_id": 45,
+   "request_id": "AUTH-0017",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-22T12:53:00"
+  },
+  {
+   "event_id": 46,
+   "request_id": "AUTH-0017",
+   "actor": "insurer_reviewer",
+   "from_state": "submitted",
+   "to_state": "under_review",
+   "reason": null,
+   "created_at": "2026-10-23T03:53:00"
+  },
+  {
+   "event_id": 47,
+   "request_id": "AUTH-0018",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-26T12:18:00"
+  },
+  {
+   "event_id": 48,
+   "request_id": "AUTH-0019",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-17T14:21:00"
+  },
+  {
+   "event_id": 49,
+   "request_id": "AUTH-0020",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-21T10:00:00"
+  },
+  {
+   "event_id": 50,
+   "request_id": "AUTH-0021",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-21T15:54:00"
+  },
+  {
+   "event_id": 51,
+   "request_id": "AUTH-0022",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-23T13:01:00"
+  },
+  {
+   "event_id": 52,
+   "request_id": "AUTH-0022",
+   "actor": "insurer_reviewer",
+   "from_state": "submitted",
+   "to_state": "under_review",
+   "reason": null,
+   "created_at": "2026-10-24T04:01:00"
+  },
+  {
+   "event_id": 53,
+   "request_id": "AUTH-0022",
+   "actor": "insurer_reviewer",
+   "from_state": "under_review",
+   "to_state": "more_info_needed",
+   "reason": "Missing: referral_letter",
+   "created_at": "2026-10-25T14:01:00"
+  },
+  {
+   "event_id": 54,
+   "request_id": "AUTH-0023",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-24T15:13:00"
+  },
+  {
+   "event_id": 55,
+   "request_id": "AUTH-0023",
+   "actor": "insurer_reviewer",
+   "from_state": "submitted",
+   "to_state": "under_review",
+   "reason": null,
+   "created_at": "2026-10-24T21:13:00"
+  },
+  {
+   "event_id": 56,
+   "request_id": "AUTH-0023",
+   "actor": "insurer_reviewer",
+   "from_state": "under_review",
+   "to_state": "more_info_needed",
+   "reason": "Missing: referral_letter, estimated_cost_ngn",
+   "created_at": "2026-10-26T20:13:00"
+  },
+  {
+   "event_id": 57,
+   "request_id": "AUTH-0024",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-21T08:11:00"
+  },
+  {
+   "event_id": 58,
+   "request_id": "AUTH-0024",
+   "actor": "insurer_reviewer",
+   "from_state": "submitted",
+   "to_state": "under_review",
+   "reason": null,
+   "created_at": "2026-10-22T01:11:00"
+  },
+  {
+   "event_id": 59,
+   "request_id": "AUTH-0024",
+   "actor": "insurer_reviewer",
+   "from_state": "under_review",
+   "to_state": "more_info_needed",
+   "reason": "Missing: referral_letter, estimated_cost_ngn",
+   "created_at": "2026-10-22T17:11:00"
+  },
+  {
+   "event_id": 60,
+   "request_id": "AUTH-0025",
+   "actor": "provider_user",
+   "from_state": null,
+   "to_state": "submitted",
+   "reason": null,
+   "created_at": "2026-10-22T12:02:00"
+  },
+  {
+   "event_id": 61,
+   "request_id": "AUTH-0025",
+   "actor": "provider_user",
+   "from_state": "submitted",
+   "to_state": "cancelled",
+   "reason": "Patient transferred to another facility",
+   "created_at": "2026-10-23T04:02:00"
+  }
+ ]
+}
