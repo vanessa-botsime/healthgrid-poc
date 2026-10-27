@@ -14,6 +14,7 @@ To plug into the main backend instead:
     app.register_blueprint(eligibility_bp)
     app.register_blueprint(metrics_bp)
 """
+from authorisations import bp as authorisations_bp
 
 from pathlib import Path
 
@@ -27,14 +28,14 @@ app.config["HEALTHGRID_DB"] = str(Path(__file__).resolve().parent / "healthgrid.
 app.config["HEALTHGRID_TODAY"] = "2026-10-28"
 app.register_blueprint(eligibility_bp)
 app.register_blueprint(metrics_bp)
-
+app.register_blueprint(authorisations_bp)
 
 @app.after_request
 def cors(resp):
     # Lets the frontend call the API from another local port during the demo.
     resp.headers["Access-Control-Allow-Origin"] = "*"
     resp.headers["Access-Control-Allow-Headers"] = "Content-Type"
-    resp.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    resp.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS, PATCH"
     return resp
 
 
