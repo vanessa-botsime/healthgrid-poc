@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IMISI HealthGrid - AI-Assisted Healthcare Transaction Infrastructure</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            },
+            health: {
+              teal: '#0d9488',
+              slate: '#0f172a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-slate-800 flex flex-col">
+
+  <!-- TOP BANNER: DEMO MODE NOTICE -->
+  <div class="bg-slate-900 text-slate-300 px-4 py-2 text-xs font-mono flex items-center justify-between border-b border-slate-800">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center gap-1.5 bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded border border-amber-500/30 font-semibold">
+        <i class="fa-solid fa-triangle-exclamation text-[10px]"></i> DEMO MODE
+      </span>
+      <span>Synthetic Data Only • NDPA / HIPAA Compliant Sandbox Environment</span>
+    </div>
+    <div class="flex items-center gap-4 text-slate-400">
+      <span><i class="fa-solid fa-server text-emerald-400 text-[10px] mr-1"></i> HealthGrid Orchestrator: <b class="text-slate-200">v1.2.0-online</b></span>
+      <span><i class="fa-solid fa-shield-halved text-blue-400 text-[10px] mr-1"></i> Audit Ledger: <b class="text-slate-200">Active</b></span>
+    </div>
+  </div>
+
+  <!-- NAVIGATION & ROLE SWITCHER BAR -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Logo & Title -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center text-white font-extrabold text-xl shadow-md shadow-brand-500/20">
+          H
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-extrabold text-lg text-slate-900 tracking-tight">IMISI HealthGrid</h1>
+            <span class="bg-brand-50 text-brand-700 text-[10px] font-bold px-2 py-0.5 rounded-full border border-brand-200">Transaction Infra</span>
+          </div>
+          <p class="text-xs text-slate-500">AI-Assisted Payer-Provider Interoperability</p>
+        </div>
+      </div>
+
+      <!-- Role Switcher Controls -->
+      <div class="flex items-center gap-2 bg-slate-100 p-1 rounded-xl border border-slate-200">
+        <button id="nav-btn-executive" onclick="switchRole('executive')" class="role-nav-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 text-slate-600 hover:text-slate-900">
+          <i class="fa-solid fa-chart-line"></i> Executive Dashboard
+        </button>
+        <button id="nav-btn-provider" onclick="switchRole('provider')" class="role-nav-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 text-slate-600 hover:text-slate-900">
+          <i class="fa-solid fa-hospital-user"></i> Provider Admin
+        </button>
+        <button id="nav-btn-insurer" onclick="switchRole('insurer')" class="role-nav-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 text-slate-600 hover:text-slate-900 relative">
+          <i class="fa-solid fa-clipboard-check"></i> Insurer Ops
+          <span id="pending-badge-count" class="bg-amber-500 text-white text-[10px] font-bold px-1.5 py-0.2 rounded-full hidden">0</span>
+        </button>
+      </div>
+
+      <!-- Quick Action / Status -->
+      <div class="flex items-center gap-3">
+        <div class="text-right hidden sm:block">
+          <div class="text-xs font-bold text-slate-800" id="current-user-name">Dr. A. Bello (St. Nicholas Hosp)</div>
+          <div class="text-[11px] text-slate-500" id="current-user-role">Provider Portal Access</div>
+        </div>
+        <div class="w-9 h-9 rounded-full bg-slate-200 border border-slate-300 flex items-center justify-center text-slate-700 font-bold text-sm" id="current-user-avatar">
+          AB
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- ========================================== -->
+    <!-- VIEW 1: EXECUTIVE OPERATIONS DASHBOARD -->
+    <!-- ========================================== -->
+    <section id="view-executive" class="role-view space-y-6">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900">HealthGrid Network Operations</h2>
+          <p class="text-sm text-slate-500">Real-time throughput metrics, turnaround SLA analytics, and processing bottlenecks.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-slate-500">Auto-refreshing live ledger</span>
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Key KPI Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between text-slate-500 text-xs font-semibold uppercase tracking-wider mb-2">
+            <span>Total Requests</span>
+            <i class="fa-solid fa-file-invoice text-brand-600 text-base"></i>
+          </div>
+          <div class="text-2xl font-extrabold text-slate-900" id="kpi-total-requests">0</div>
+          <div class="text-xs text-emerald-600 font-medium mt-1"><i class="fa-solid fa-arrow-up text-[10px]"></i> +18% vs last week</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between text-slate-500 text-xs font-semibold uppercase tracking-wider mb-2">
+            <span>Approval Rate</span>
+            <i class="fa-solid fa-circle-check text-emerald-600 text-base"></i>
+          </div>
+          <div class="text-2xl font-extrabold text-slate-900" id="kpi-approval-rate">0%</div>
+          <div class="text-xs text-slate-500 font-medium mt-1">Target SLA: &gt;85%</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between text-slate-500 text-xs font-semibold uppercase tracking-wider mb-2">
+            <span>Median Turnaround</span>
+            <i class="fa-solid fa-stopwatch text-amber-500 text-base"></i>
+          </div>
+          <div class="text-2xl font-extrabold text-slate-900">14 <span class="text-sm font-normal text-slate-500">mins</span></div>
+          <div class="text-xs text-emerald-600 font-semibold mt-1"><i class="fa-solid fa-bolt text-[10px]"></i> Down from 4.2 hrs</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between text-slate-500 text-xs font-semibold uppercase tracking-wider mb-2">
+            <span>Pending Review Queue</span>
+            <i class="fa-solid fa-hourglass-half text-blue-600 text-base"></i>
+          </div>
+          <div class="text-2xl font-extrabold text-slate-900" id="kpi-pending-queue">0</div>
+          <div class="text-xs text-amber-600 font-medium mt-1">Requires HMO action</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between text-slate-500 text-xs font-semibold uppercase tracking-wider mb-2">
+            <span>Incomplete Submissions</span>
+            <i class="fa-solid fa-shield-cat text-rose-500 text-base"></i>
+          </div>
+          <div class="text-2xl font-extrabold text-slate-900" id="kpi-incomplete-alerts">0</div>
+          <div class="text-xs text-emerald-600 font-medium mt-1"><i class="fa-solid fa-robot text-[10px]"></i> Flagged by AI assistant</div>
+        </div>
+
+      </div>
+
+      <!-- Charts Row -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Turnaround Trend Chart -->
+        <div class="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="font-bold text-slate-900 text-base">Care Authorisation Turnaround Time Trend</h3>
+              <p class="text-xs text-slate-500">Comparison of legacy manual processing vs HealthGrid automated orchestration</p>
+            </div>
+            <span class="bg-slate-100 text-slate-600 text-xs font-semibold px-2.5 py-1 rounded-lg">Last 30 Days</span>
+          </div>
+          <div class="h-64 relative">
+            <canvas id="chart-turnaround"></canvas>
+          </div>
+        </div>
+
+        <!-- Distribution Status Chart -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <h3 class="font-bold text-slate-900 text-base mb-1">Authorisation Status Mix</h3>
+            <p class="text-xs text-slate-500 mb-4">Breakdown of current network transaction states</p>
+            <div class="h-52 relative">
+              <canvas id="chart-status-mix"></canvas>
+            </div>
+          </div>
+          <div class="pt-4 border-t border-slate-100 text-center text-xs text-slate-500 font-mono">
+            Transaction Integrity Guaranteed by SHA-256 Hash Chain
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Live Audit Event Stream Table -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-5 border-b border-slate-200 flex items-center justify-between bg-slate-50/50">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-list-check text-brand-600"></i>
+            <h3 class="font-bold text-slate-900 text-base">Network Audit Event Ledger</h3>
+          </div>
+          <span class="text-xs text-slate-500 font-mono">Immutable Log Hash Chain Enabled</span>
+        </div>
+        <div class="overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-100 text-slate-600 font-bold uppercase tracking-wider border-b border-slate-200">
+              <tr>
+                <th class="py-3 px-4">Timestamp</th>
+                <th class="py-3 px-4">Transaction ID</th>
+                <th class="py-3 px-4">Actor</th>
+                <th class="py-3 px-4">Action</th>
+                <th class="py-3 px-4">State Transition</th>
+                <th class="py-3 px-4 font-mono">SHA-256 Hash Correlation</th>
+              </tr>
+            </thead>
+            <tbody id="audit-log-tbody" class="divide-y divide-slate-100 text-slate-700">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 2: PROVIDER ADMIN CONSOLE -->
+    <!-- ========================================== -->
+    <section id="view-provider" class="role-view hidden space-y-6">
+      
+      <!-- Section Header -->
+      <div>
+        <h2 class="text-2xl font-bold text-slate-900">Hospital Provider Portal</h2>
+        <p class="text-sm text-slate-500">Search member eligibility, prepare pre-authorisations with AI validation, and track submission progress.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- LEFT COLUMN: MEMBER LOOKUP & ELIGIBILITY CARD (4 Cols) -->
+        <div class="lg:col-span-4 space-y-6">
+          
+          <!-- Search Card -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h3 class="font-bold text-slate-900 text-base mb-3 flex items-center gap-2">
+              <i class="fa-solid fa-id-card text-brand-600"></i> Synthetic Member Lookup
+            </h3>
+            <p class="text-xs text-slate-500 mb-4">Enter Synthetic Member ID to query real-time coverage status.</p>
+
+            <div class="space-y-3">
+              <div>
+                <label class="text-xs font-bold text-slate-700 uppercase">Member ID</label>
+                <div class="mt-1 flex gap-2">
+                  <input type="text" id="member-search-input" value="MEM-89201" placeholder="e.g. MEM-89201" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-mono font-bold focus:ring-2 focus:ring-brand-500 focus:bg-white outline-none">
+                  <button onclick="performMemberLookup()" class="bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-magnifying-glass"></i> Verify
+                  </button>
+                </div>
+              </div>
+
+              <!-- Quick Presets -->
+              <div class="flex items-center gap-2 pt-1">
+                <span class="text-[11px] text-slate-500">Try demo IDs:</span>
+                <button onclick="quickSelectMember('MEM-89201')" class="text-[11px] font-mono bg-slate-100 hover:bg-brand-50 text-brand-700 px-2 py-0.5 rounded border border-slate-200">MEM-89201</button>
+                <button onclick="quickSelectMember('MEM-33412')" class="text-[11px] font-mono bg-slate-100 hover:bg-brand-50 text-brand-700 px-2 py-0.5 rounded border border-slate-200">MEM-33412</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Eligibility Verification Output Card -->
+          <div id="eligibility-status-card" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+            <!-- Dynamically populated by JS -->
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: AUTHORISATION FORM & LIVE TRACKER (8 Cols) -->
+        <div class="lg:col-span-8 space-y-6">
+          
+          <!-- Creation Form Card -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
+              <div>
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                  <i class="fa-solid fa-notes-medical text-brand-600"></i> New Care Authorisation Request
+                </h3>
+                <p class="text-xs text-slate-500">Complete service details to initiate AI pre-submission verification.</p>
+              </div>
+              <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold px-2.5 py-1 rounded-lg flex items-center gap-1">
+                <i class="fa-solid fa-bolt"></i> Real-Time Routing
+              </span>
+            </div>
+
+            <form id="auth-request-form" onsubmit="handleAuthSubmit(event)" class="space-y-4">
+              
+              <!-- Patient / HMO Info Readonly Header -->
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs">
+                <div>
+                  <span class="text-slate-400 block font-semibold">SELECTED PATIENT</span>
+                  <span class="font-bold text-slate-800" id="form-patient-name">Amina O. Suleiman</span>
+                </div>
+                <div>
+                  <span class="text-slate-400 block font-semibold">INSURER / HMO</span>
+                  <span class="font-bold text-slate-800" id="form-patient-hmo">Reliance Health HMO</span>
+                </div>
+                <div>
+                  <span class="text-slate-400 block font-semibold">PLAN TIER</span>
+                  <span class="font-bold text-emerald-600" id="form-patient-plan">Gold Executive Care</span>
+                </div>
+              </div>
+
+              <!-- Form Fields Row 1 -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs font-bold text-slate-700 uppercase">Service Category <span class="text-rose-500">*</span></label>
+                  <select id="form-category" onchange="triggerAIAssistantCheck()" class="mt-1 w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-brand-500 focus:bg-white outline-none">
+                    <option value="Surgical">Surgical Procedure (Inpatient)</option>
+                    <option value="Diagnostics">Advanced Diagnostics (MRI / CT Scan)</option>
+                    <option value="Inpatient">General Hospital Admission</option>
+                    <option value="Maternity">Maternity Care / Delivery</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="text-xs font-bold text-slate-700 uppercase">Diagnosis / Reason (ICD-10) <span class="text-rose-500">*</span></label>
+                  <input type="text" id="form-icd10" value="K80.20 - Calculus of gallbladder without cholecystitis" oninput="triggerAIAssistantCheck()" class="mt-1 w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-brand-500 focus:bg-white outline-none">
+                </div>
+              </div>
+
+              <!-- Form Fields Row 2 -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs font-bold text-slate-700 uppercase">Requested Date of Service <span class="text-rose-500">*</span></label>
+                  <input type="date" id="form-service-date" class="mt-1 w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-brand-500 focus:bg-white outline-none">
+                </div>
+
+                <div>
+                  <label class="text-xs font-bold text-slate-700 uppercase">Estimated Total Cost (NGN) <span class="text-rose-500">*</span></label>
+                  <input type="number" id="form-estimated-cost" value="450000" oninput="triggerAIAssistantCheck()" class="mt-1 w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-brand-500 focus:bg-white outline-none">
+                </div>
+              </div>
+
+              <!-- Clinical Notes -->
+              <div>
+                <label class="text-xs font-bold text-slate-700 uppercase">Clinical Justification &amp; Notes</label>
+                <textarea id="form-clinical-notes" rows="2" placeholder="Describe symptoms, conservative treatment failure, and medical necessity..." oninput="triggerAIAssistantCheck()" class="mt-1 w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-normal focus:ring-2 focus:ring-brand-500 focus:bg-white outline-none">Patient presents with recurrent upper right quadrant biliary colic. Ultrasound confirms symptomatic gallstones requiring laparoscopic cholecystectomy.</textarea>
+              </div>
+
+              <!-- Document Upload Simulator -->
+              <div>
+                <label class="text-xs font-bold text-slate-700 uppercase block mb-1">Supporting Documentation Attachment</label>
+                <div class="border-2 border-dashed border-slate-300 hover:border-brand-500 bg-slate-50 p-4 rounded-xl text-center transition-colors">
+                  <i class="fa-solid fa-cloud-arrow-up text-brand-600 text-xl mb-1"></i>
+                  <div class="text-xs font-semibold text-slate-700">Ultrasound_Scan_Report_K80.pdf attached</div>
+                  <div class="text-[11px] text-slate-400 mt-0.5">Click or drag files to replace clinical scans, labs, or consent forms</div>
+                </div>
+              </div>
+
+              <!-- AI COMPLETENESS ASSISTANT CALLOUT BOX -->
+              <div id="ai-assistant-box" class="p-4 rounded-xl border transition-all space-y-2">
+                <!-- Dynamically updated by AI assistant logic -->
+              </div>
+
+              <!-- Action Button Bar -->
+              <div class="pt-2 flex items-center justify-end gap-3">
+                <button type="button" onclick="resetAuthorisationForm()" class="px-4 py-2 text-xs font-bold text-slate-600 hover:text-slate-900 transition-colors">
+                  Reset Form
+                </button>
+                <button type="submit" id="submit-auth-btn" class="bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs px-6 py-2.5 rounded-xl shadow-md shadow-brand-500/20 transition-all flex items-center gap-2">
+                  <i class="fa-solid fa-paper-plane"></i> Submit Care Authorisation
+                </button>
+              </div>
+
+            </form>
+
+          </div>
+
+          <!-- Live Submitted Requests List & Tracker Panel -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+            <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+              <i class="fa-solid fa-clock-rotate-left text-brand-600"></i> Provider Submitted Requests &amp; Real-time Tracker
+            </h3>
+
+            <div id="provider-requests-list" class="space-y-4">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 3: INSURER OPS WORK QUEUE (HMO VIEW) -->
+    <!-- ========================================== -->
+    <section id="view-insurer" class="role-view hidden space-y-6">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900">Insurers &amp; HMO Adjudication Queue</h2>
+          <p class="text-sm text-slate-500">Review pending pre-authorisation requests, evaluate AI medical summaries, and adjudicate with full audit tracking.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <!-- Filter Buttons -->
+          <button onclick="filterQueue('ALL')" class="queue-filter-btn active-filter px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-600 text-white">All</button>
+          <button onclick="filterQueue('Pending')" class="queue-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">Pending</button>
+          <button onclick="filterQueue('Approved')" class="queue-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">Approved</button>
+          <button onclick="filterQueue('Info Required')" class="queue-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">Info Required</button>
+        </div>
+      </div>
+
+      <!-- Work Queue Table -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-100 text-slate-600 font-bold uppercase tracking-wider border-b border-slate-200">
+              <tr>
+                <th class="py-3.5 px-4">Request ID</th>
+                <th class="py-3.5 px-4">Patient / Member ID</th>
+                <th class="py-3.5 px-4">Provider Hospital</th>
+                <th class="py-3.5 px-4">Service Category</th>
+                <th class="py-3.5 px-4">Est. Cost</th>
+                <th class="py-3.5 px-4">SLA Urgency</th>
+                <th class="py-3.5 px-4">Status</th>
+                <th class="py-3.5 px-4 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody id="insurer-queue-tbody" class="divide-y divide-slate-100 text-slate-700">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- MODAL: INSURER ADJUDICATION & DETAIL VIEW -->
+  <!-- ========================================== -->
+  <div id="adjudication-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white max-w-3xl w-full rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[90vh]">
+      
+      <!-- Modal Header -->
+      <div class="bg-slate-900 text-white p-5 flex items-center justify-between border-b border-slate-800">
+        <div>
+          <span class="text-xs font-mono text-brand-400 font-bold" id="modal-req-id">REQ-9901</span>
+          <h3 class="text-lg font-bold" id="modal-patient-name">Care Authorisation Review</h3>
+        </div>
+        <button onclick="closeAdjudicationModal()" class="text-slate-400 hover:text-white text-xl">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Modal Content Body -->
+      <div class="p-6 overflow-y-auto custom-scrollbar space-y-6 text-xs">
+        
+        <!-- Summary Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+            <span class="text-slate-400 font-semibold block">PROVIDER HOSPITAL</span>
+            <span class="font-bold text-slate-800 text-sm" id="modal-provider-name">St. Nicholas Hospital</span>
+          </div>
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+            <span class="text-slate-400 font-semibold block">MEMBER PLAN</span>
+            <span class="font-bold text-brand-700 text-sm" id="modal-plan-name">Gold Executive</span>
+          </div>
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+            <span class="text-slate-400 font-semibold block">ESTIMATED COST</span>
+            <span class="font-bold text-slate-900 text-sm font-mono" id="modal-cost">NGN 450,000</span>
+          </div>
+        </div>
+
+        <!-- Clinical Reason -->
+        <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-2">
+          <span class="font-bold text-slate-900 uppercase text-[11px] tracking-wider block">Submitted ICD-10 &amp; Justification</span>
+          <p id="modal-clinical-justification" class="text-slate-700 leading-relaxed font-mono">
+            K80.20 - Calculus of gallbladder without cholecystitis. Ultrasound confirms symptomatic gallstones requiring laparoscopic cholecystectomy.
+          </p>
+        </div>
+
+        <!-- AI ADMINISTRATIVE CASE SUMMARY BOX -->
+        <div class="bg-brand-50/60 border border-brand-200 rounded-xl p-4 space-y-2">
+          <div class="flex items-center gap-2 text-brand-800 font-bold">
+            <i class="fa-solid fa-wand-magic-sparkles text-brand-600"></i> AI Co-Pilot Clinical &amp; Financial Case Summary
+          </div>
+          <ul class="list-disc list-inside space-y-1 text-brand-900 text-xs" id="modal-ai-summary-list">
+            <li><b>Policy Match:</b> Procedure (Laparoscopic Cholecystectomy) covered under Gold Executive Plan tier.</li>
+            <li><b>Financial Risk:</b> Requested NGN 450,000 is within standard tariff band (±5% variance) for Lagos private tertiary facilities.</li>
+            <li><b>Documentation:</b> Ultrasound scan attachment attached; clinical evidence requirement satisfied.</li>
+          </ul>
+        </div>
+
+        <!-- Status Timeline Visualization -->
+        <div class="space-y-2">
+          <span class="font-bold text-slate-900 uppercase text-[11px] tracking-wider block">State Machine Lifecycle</span>
+          <div class="flex items-center justify-between relative px-4 py-2 bg-slate-50 rounded-xl border border-slate-200" id="modal-state-timeline">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Adjudication Decision Box -->
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+          <label class="font-bold text-slate-900 uppercase text-[11px] tracking-wider block">HMO Adjudicator Comments / Mandatory Justification</label>
+          <textarea id="adjudication-comments" rows="2" placeholder="Enter reason for approval, decline, or requesting additional clinical documents..." class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer Action Controls -->
+      <div class="p-4 bg-slate-100 border-t border-slate-200 flex items-center justify-between">
+        <button onclick="closeAdjudicationModal()" class="px-4 py-2 text-xs font-bold text-slate-600 hover:text-slate-900">
+          Cancel
+        </button>
+
+        <div class="flex items-center gap-2">
+          <button onclick="adjudicateCurrentRequest('Info Required')" class="bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">
+            <i class="fa-solid fa-circle-question mr-1"></i> Request Info
+          </button>
+          <button onclick="adjudicateCurrentRequest('Declined')" class="bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">
+            <i class="fa-solid fa-circle-xmark mr-1"></i> Decline
+          </button>
+          <button onclick="adjudicateCurrentRequest('Approved')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-6 py-2 rounded-xl transition-all shadow-md shadow-emerald-500/20">
+            <i class="fa-solid fa-circle-check mr-1"></i> Approve Request
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ========================================== -->
+  <!-- JAVASCRIPT APPLICATION CORE LOGIC -->
+  <!-- ========================================== -->
+  <script>
+    // GLOBAL STATE MANAGEMENT
+    let activeRole = 'executive'; // 'executive' | 'provider' | 'insurer'
+    let currentFilter = 'ALL';
+    let selectedRequestForModal = null;
+
+    // SYNTHETIC MEMBERS DATABASE
+    const syntheticMembers = {
+      "MEM-89201": {
+        id: "MEM-89201",
+        name: "Amina O. Suleiman",
+        hmo: "Reliance Health HMO",
+        hmoCode: "RLN-HMO",
+        plan: "Gold Executive Care",
+        validity: "Active (Expires Dec 2026)",
+        preAuthRequired: ["Surgical", "Inpatient", "Advanced Diagnostics"],
+        avatarBg: "bg-emerald-100 text-emerald-800"
+      },
+      "MEM-33412": {
+        id: "MEM-33412",
+        name: "Emeka K. Chukwu",
+        hmo: "Hygeia HMO",
+        hmoCode: "HYG-HMO",
+        plan: "Standard Corporate Plan",
+        validity: "Active (Expires Oct 2026)",
+        preAuthRequired: ["Surgical", "Maternity"],
+        avatarBg: "bg-blue-100 text-blue-800"
+      }
+    };
+
+    let currentSelectedMember = syntheticMembers["MEM-89201"];
+
+    // AUTHORISATION REQUESTS STORE
+    let authRequests = [
+      {
+        id: "REQ-9901",
+        memberId: "MEM-89201",
+        memberName: "Amina O. Suleiman",
+        hmo: "Reliance Health HMO",
+        provider: "St. Nicholas Hospital",
+        category: "Surgical",
+        icd10: "K80.20 - Gallbladder Calculus",
+        cost: 450000,
+        notes: "Patient presents with recurrent upper right quadrant biliary colic. Ultrasound confirms symptomatic gallstones.",
+        status: "Submitted", // 'Draft', 'Submitted', 'Under Review', 'Info Required', 'Approved', 'Declined'
+        slaTimer: "18 mins left",
+        timestamp: "2026-10-27 12:45",
+        aiCompletenessScore: 98,
+        aiWarnings: []
+      },
+      {
+        id: "REQ-9884",
+        memberId: "MEM-33412",
+        memberName: "Emeka K. Chukwu",
+        hmo: "Hygeia HMO",
+        provider: "Lagoon Hospitals Ikoyi",
+        category: "Diagnostics",
+        icd10: "M54.5 - Lumbar Spine MRI",
+        cost: 180000,
+        notes: "Chronic lower back pain with radiation to lower limb.",
+        status: "Approved",
+        slaTimer: "Completed",
+        timestamp: "2026-10-27 10:15",
+        aiCompletenessScore: 100,
+        aiWarnings: []
+      }
+    ];
+
+    // AUDIT LOG LEDGER STORE
+    let auditLedger = [
+      {
+        timestamp: "2026-10-27 10:15:32",
+        reqId: "REQ-9884",
+        actor: "Officer T. Lawson (Hygeia HMO)",
+        action: "DECISION_APPROVED",
+        stateTransition: "Under Review ➔ Approved",
+        hash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        timestamp: "2026-10-27 12:45:00",
+        reqId: "REQ-9901",
+        actor: "Dr. A. Bello (St. Nicholas)",
+        action: "REQUEST_SUBMITTED",
+        stateTransition: "Draft ➔ Submitted",
+        hash: "8f4e21a7c56911e2b34a00155d003b1298fc1c149afbf4c8996fb92427ae41e"
+      }
+    ];
+
+    // CHART INSTANCES
+    let chartTurnaroundInstance = null;
+    let chartStatusMixInstance = null;
+
+    // INITIALIZATION ON DOM LOAD
+    document.addEventListener("DOMContentLoaded", function() {
+      // Set default service date to today
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('form-service-date').value = today;
+
+      // Render initial view
+      performMemberLookup();
+      renderAllViews();
+      initCharts();
+    });
+
+    // ROLE SWITCHER LOGIC
+    function switchRole(role) {
+      activeRole = role;
+      
+      // Update UI Tabs
+      document.querySelectorAll('.role-nav-btn').forEach(btn => {
+        btn.classList.remove('bg-white', 'text-brand-700', 'shadow-sm', 'border');
+        btn.classList.add('text-slate-600');
+      });
+
+      const activeBtn = document.getElementById(`nav-btn-${role}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-white', 'text-brand-700', 'shadow-sm', 'border');
+        activeBtn.classList.remove('text-slate-600');
+      }
+
+      // Hide all sections
+      document.querySelectorAll('.role-view').forEach(sec => sec.classList.add('hidden'));
+
+      // Show selected section
+      document.getElementById(`view-${role}`).classList.remove('hidden');
+
+      // Update User Badge Info
+      const userNameEl = document.getElementById('current-user-name');
+      const userRoleEl = document.getElementById('current-user-role');
+      const userAvatarEl = document.getElementById('current-user-avatar');
+
+      if (role === 'provider') {
+        userNameEl.innerText = "Dr. A. Bello (St. Nicholas Hosp)";
+        userRoleEl.innerText = "Provider Admin Access";
+        userAvatarEl.innerText = "AB";
+      } else if (role === 'insurer') {
+        userNameEl.innerText = "Officer T. Lawson (Reliance HMO)";
+        userRoleEl.innerText = "Insurer Adjudicator";
+        userAvatarEl.innerText = "TL";
+      } else {
+        userNameEl.innerText = "Executive Ops Controller";
+        userRoleEl.innerText = "HealthGrid Network Admin";
+        userAvatarEl.innerText = "EX";
+      }
+
+      // Re-render
+      renderAllViews();
+    }
+
+    // MEMBER LOOKUP FUNCTION
+    function quickSelectMember(id) {
+      document.getElementById('member-search-input').value = id;
+      performMemberLookup();
+    }
+
+    function performMemberLookup() {
+      const searchId = document.getElementById('member-search-input').value.trim();
+      const member = syntheticMembers[searchId];
+
+      const outputCard = document.getElementById('eligibility-status-card');
+
+      if (member) {
+        currentSelectedMember = member;
+        
+        // Update Form Displayed Member
+        document.getElementById('form-patient-name').innerText = member.name;
+        document.getElementById('form-patient-hmo').innerText = member.hmo;
+        document.getElementById('form-patient-plan').innerText = member.plan;
+
+        outputCard.innerHTML = `
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <span class="text-xs font-bold text-slate-400 uppercase">Eligibility Result</span>
+            <span class="bg-emerald-100 text-emerald-800 font-bold text-[11px] px-2.5 py-0.5 rounded-full flex items-center gap-1">
+              <i class="fa-solid fa-circle-check"></i> COVERAGE ACTIVE
+            </span>
+          </div>
+
+          <div class="space-y-2">
+            <div class="font-extrabold text-slate-900 text-base">${member.name}</div>
+            <div class="text-xs text-slate-600 font-mono">ID: ${member.id} • ${member.hmo}</div>
+            <div class="text-xs text-brand-700 font-semibold">${member.plan}</div>
+          </div>
+
+          <div class="pt-2 border-t border-slate-100 text-xs space-y-1.5">
+            <div class="text-slate-500"><b class="text-slate-700">Pre-Auth Mandate:</b> Required for ${member.preAuthRequired.join(', ')}</div>
+            <div class="text-slate-500"><b class="text-slate-700">Validity Period:</b> ${member.validity}</div>
+          </div>
+        `;
+      } else {
+        outputCard.innerHTML = `
+          <div class="p-4 bg-rose-50 border border-rose-200 rounded-xl text-center space-y-2">
+            <i class="fa-solid fa-circle-exclamation text-rose-600 text-xl"></i>
+            <div class="text-xs font-bold text-rose-900">Synthetic Member Not Found</div>
+            <div class="text-[11px] text-rose-700">Please search MEM-89201 or MEM-33412.</div>
+          </div>
+        `;
+      }
+
+      triggerAIAssistantCheck();
+    }
+
+    // AI COMPLETENESS ASSISTANT LOGIC
+    function triggerAIAssistantCheck() {
+      const category = document.getElementById('form-category').value;
+      const icd10 = document.getElementById('form-icd10').value;
+      const cost = parseFloat(document.getElementById('form-estimated-cost').value) || 0;
+      const notes = document.getElementById('form-clinical-notes').value;
+
+      const aiBox = document.getElementById('ai-assistant-box');
+      let score = 100;
+      let warnings = [];
+
+      // Rules engine check
+      if (category === "Surgical" && cost > 300000 && !notes.toLowerCase().includes("ultrasound") && !notes.toLowerCase().includes("scan")) {
+        score -= 25;
+        warnings.push("High-cost surgical category requires explicitly mentioned clinical imaging scan.");
+      }
+
+      if (!icd10 || icd10.length < 5) {
+        score -= 30;
+        warnings.push("Missing valid ICD-10 diagnostic code specification.");
+      }
+
+      if (notes.length < 20) {
+        score -= 20;
+        warnings.push("Clinical justification text is too brief for automated HMO pre-adjudication.");
+      }
+
+      // Render AI Assistant Feedback Box
+      if (score === 100) {
+        aiBox.className = "p-4 rounded-xl border bg-emerald-50 border-emerald-200 text-xs space-y-1";
+        aiBox.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-emerald-900 flex items-center gap-1.5">
+              <i class="fa-solid fa-robot text-emerald-600"></i> AI Completeness Check: PASSED
+            </span>
+            <span class="font-mono font-bold bg-emerald-200 text-emerald-800 px-2 py-0.5 rounded">100% Quality Rating</span>
+          </div>
+          <p class="text-emerald-800">All required clinical documentation and policy fields are satisfied. Zero pre-adjudication delay expected.</p>
+        `;
+      } else {
+        aiBox.className = "p-4 rounded-xl border bg-amber-50 border-amber-200 text-xs space-y-2";
+        aiBox.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-amber-900 flex items-center gap-1.5">
+              <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> AI Completeness Assistant: Action Recommended
+            </span>
+            <span class="font-mono font-bold bg-amber-200 text-amber-900 px-2 py-0.5 rounded">${score}% Score</span>
+          </div>
+          <ul class="list-disc list-inside text-amber-800 space-y-1">
+            ${warnings.map(w => `<li>${w}</li>`).join('')}
+          </ul>
+        `;
+      }
+    }
+
+    // FORM SUBMISSION HANDLER
+    function handleAuthSubmit(e) {
+      e.preventDefault();
+
+      const newId = "REQ-" + Math.floor(1000 + Math.random() * 9000);
+      const category = document.getElementById('form-category').value;
+      const icd10 = document.getElementById('form-icd10').value;
+      const cost = parseFloat(document.getElementById('form-estimated-cost').value) || 0;
+      const notes = document.getElementById('form-clinical-notes').value;
+
+      const newRequest = {
+        id: newId,
+        memberId: currentSelectedMember.id,
+        memberName: currentSelectedMember.name,
+        hmo: currentSelectedMember.hmo,
+        provider: "St. Nicholas Hospital",
+        category: category,
+        icd10: icd10,
+        cost: cost,
+        notes: notes,
+        status: "Submitted",
+        slaTimer: "15 mins left",
+        timestamp: new Date().toISOString().replace('T', ' ').substring(0, 16),
+        aiCompletenessScore: 95,
+        aiWarnings: []
+      };
+
+      // Push to Store
+      authRequests.unshift(newRequest);
+
+      // Append to Audit Ledger
+      auditLedger.unshift({
+        timestamp: new Date().toISOString().replace('T', ' ').substring(0, 19),
+        reqId: newId,
+        actor: "Dr. A. Bello (St. Nicholas)",
+        action: "REQUEST_SUBMITTED",
+        stateTransition: "Draft ➔ Submitted",
+        hash: generateMockHash()
+      });
+
+      // Refresh UI
+      renderAllViews();
+
+      // Show notification badge alert
+      alert(`Authorisation Request ${newId} successfully routed to ${currentSelectedMember.hmo}!`);
+    }
+
+    function resetAuthorisationForm() {
+      document.getElementById('auth-request-form').reset();
+      triggerAIAssistantCheck();
+    }
+
+    // RENDER LOGIC ACROSS VIEWS
+    function renderAllViews() {
+      renderExecutiveDashboard();
+      renderProviderConsole();
+      renderInsurerQueue();
+      updateCharts();
+    }
+
+    // 1. Executive Dashboard Render
+    function renderExecutiveDashboard() {
+      const total = authRequests.length;
+      const approved = authRequests.filter(r => r.status === 'Approved').length;
+      const pending = authRequests.filter(r => r.status === 'Submitted' || r.status === 'Under Review').length;
+      const incomplete = authRequests.filter(r => r.status === 'Info Required').length;
+
+      const approvalRate = total > 0 ? Math.round((approved / total) * 100) : 0;
+
+      document.getElementById('kpi-total-requests').innerText = total;
+      document.getElementById('kpi-approval-rate').innerText = approvalRate + "%";
+      document.getElementById('kpi-pending-queue').innerText = pending;
+      document.getElementById('kpi-incomplete-alerts').innerText = incomplete;
+
+      // Pending badge on nav bar
+      const badge = document.getElementById('pending-badge-count');
+      if (pending > 0) {
+        badge.innerText = pending;
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+
+      // Render Audit Log
+      const auditTbody = document.getElementById('audit-log-tbody');
+      auditTbody.innerHTML = auditLedger.map(log => `
+        <tr class="hover:bg-slate-50 transition-colors">
+          <td class="py-3 px-4 text-slate-500 font-mono">${log.timestamp}</td>
+          <td class="py-3 px-4 font-bold text-brand-700 font-mono">${log.reqId}</td>
+          <td class="py-3 px-4 font-semibold text-slate-800">${log.actor}</td>
+          <td class="py-3 px-4"><span class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-mono font-bold">${log.action}</span></td>
+          <td class="py-3 px-4 font-medium text-slate-700">${log.stateTransition}</td>
+          <td class="py-3 px-4 text-slate-400 font-mono text-[10px]">${log.hash.substring(0, 16)}...</td>
+        </tr>
+      `).join('');
+    }
+
+    // 2. Provider Console Render
+    function renderProviderConsole() {
+      const reqList = document.getElementById('provider-requests-list');
+
+      reqList.innerHTML = authRequests.map(req => {
+        let statusBadgeClass = "bg-blue-100 text-blue-800";
+        if (req.status === 'Approved') statusBadgeClass = "bg-emerald-100 text-emerald-800";
+        if (req.status === 'Declined') statusBadgeClass = "bg-rose-100 text-rose-800";
+        if (req.status === 'Info Required') statusBadgeClass = "bg-amber-100 text-amber-800";
+
+        return `
+          <div class="border border-slate-200 rounded-xl p-4 space-y-3 bg-slate-50/50 hover:bg-white transition-colors">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="font-mono font-bold text-brand-700 text-xs">${req.id}</span>
+                <span class="text-xs font-bold text-slate-800">${req.memberName} (${req.category})</span>
+              </div>
+              <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full ${statusBadgeClass}">${req.status}</span>
+            </div>
+
+            <div class="text-xs text-slate-600 grid grid-cols-2 sm:grid-cols-4 gap-2 font-mono">
+              <div><b class="text-slate-400 font-sans">HMO:</b> ${req.hmo}</div>
+              <div><b class="text-slate-400 font-sans">Cost:</b> NGN ${req.cost.toLocaleString()}</div>
+              <div><b class="text-slate-400 font-sans">Submitted:</b> ${req.timestamp}</div>
+              <div><b class="text-slate-400 font-sans">SLA:</b> ${req.slaTimer}</div>
+            </div>
+
+            <!-- State Machine Step Bar -->
+            <div class="flex items-center justify-between pt-2 border-t border-slate-200/60 text-[10px] font-semibold text-slate-400">
+              <span class="${req.status !== 'Draft' ? 'text-brand-600 font-bold' : ''}">1. Submitted</span>
+              <i class="fa-solid fa-chevron-right text-[8px]"></i>
+              <span class="${req.status === 'Under Review' || req.status === 'Approved' || req.status === 'Declined' ? 'text-brand-600 font-bold' : ''}">2. HMO Review</span>
+              <i class="fa-solid fa-chevron-right text-[8px]"></i>
+              <span class="${req.status === 'Approved' ? 'text-emerald-600 font-bold' : (req.status === 'Declined' ? 'text-rose-600 font-bold' : '')}">3. Final Decision</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 3. Insurer Queue Render
+    function filterQueue(status) {
+      currentFilter = status;
+      document.querySelectorAll('.queue-filter-btn').forEach(b => {
+        b.classList.remove('bg-brand-600', 'text-white');
+        b.classList.add('bg-slate-100', 'text-slate-700');
+      });
+      event.target.classList.add('bg-brand-600', 'text-white');
+      renderInsurerQueue();
+    }
+
+    function renderInsurerQueue() {
+      const tbody = document.getElementById('insurer-queue-tbody');
+      
+      let filtered = authRequests;
+      if (currentFilter !== 'ALL') {
+        filtered = authRequests.filter(r => r.status === currentFilter);
+      }
+
+      tbody.innerHTML = filtered.map(req => {
+        let statusBadgeClass = "bg-blue-100 text-blue-800";
+        if (req.status === 'Approved') statusBadgeClass = "bg-emerald-100 text-emerald-800";
+        if (req.status === 'Declined') statusBadgeClass = "bg-rose-100 text-rose-800";
+        if (req.status === 'Info Required') statusBadgeClass = "bg-amber-100 text-amber-800";
+
+        return `
+          <tr class="hover:bg-slate-50 transition-colors">
+            <td class="py-3.5 px-4 font-mono font-bold text-brand-700">${req.id}</td>
+            <td class="py-3.5 px-4 font-semibold text-slate-800">${req.memberName} <span class="block text-[10px] text-slate-400 font-mono">${req.memberId}</span></td>
+            <td class="py-3.5 px-4 text-slate-600">${req.provider}</td>
+            <td class="py-3.5 px-4 font-medium text-slate-800">${req.category}</td>
+            <td class="py-3.5 px-4 font-mono font-bold text-slate-900">NGN ${req.cost.toLocaleString()}</td>
+            <td class="py-3.5 px-4 font-mono font-semibold text-amber-600"><i class="fa-solid fa-clock mr-1"></i>${req.slaTimer}</td>
+            <td class="py-3.5 px-4"><span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ${statusBadgeClass}">${req.status}</span></td>
+            <td class="py-3.5 px-4 text-right">
+              <button onclick="openAdjudicationModal('${req.id}')" class="bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs px-3 py-1.5 rounded-lg shadow-sm transition-all">
+                Review &amp; Adjudicate
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // MODAL ACTIONS
+    function openAdjudicationModal(id) {
+      const req = authRequests.find(r => r.id === id);
+      if (!req) return;
+
+      selectedRequestForModal = req;
+
+      document.getElementById('modal-req-id').innerText = req.id;
+      document.getElementById('modal-patient-name').innerText = req.memberName + " - Authorisation Review";
+      document.getElementById('modal-provider-name').innerText = req.provider;
+      document.getElementById('modal-plan-name').innerText = req.hmo;
+      document.getElementById('modal-cost').innerText = "NGN " + req.cost.toLocaleString();
+      document.getElementById('modal-clinical-justification').innerText = req.notes;
+
+      // Render timeline
+      document.getElementById('modal-state-timeline').innerHTML = `
+        <span class="font-bold text-brand-600"><i class="fa-solid fa-circle-check"></i> Draft</span>
+        <i class="fa-solid fa-arrow-right text-slate-300"></i>
+        <span class="font-bold text-brand-600"><i class="fa-solid fa-circle-check"></i> Submitted</span>
+        <i class="fa-solid fa-arrow-right text-slate-300"></i>
+        <span class="font-bold ${req.status === 'Approved' ? 'text-emerald-600' : (req.status === 'Declined' ? 'text-rose-600' : 'text-amber-600 animate-pulse')}"><i class="fa-solid fa-spinner"></i> ${req.status}</span>
+      `;
+
+      document.getElementById('adjudication-modal').classList.remove('hidden');
+    }
+
+    function closeAdjudicationModal() {
+      document.getElementById('adjudication-modal').classList.add('hidden');
+      selectedRequestForModal = null;
+    }
+
+    function adjudicateCurrentRequest(newStatus) {
+      if (!selectedRequestForModal) return;
+
+      const comments = document.getElementById('adjudication-comments').value || "Adjudicated via HMO portal.";
+
+      const priorState = selectedRequestForModal.status;
+      selectedRequestForModal.status = newStatus;
+      selectedRequestForModal.slaTimer = "Completed";
+
+      // Append Audit Log
+      auditLedger.unshift({
+        timestamp: new Date().toISOString().replace('T', ' ').substring(0, 19),
+        reqId: selectedRequestForModal.id,
+        actor: "Officer T. Lawson (Reliance HMO)",
+        action: `DECISION_${newStatus.toUpperCase().replace(' ', '_')}`,
+        stateTransition: `${priorState} ➔ ${newStatus}`,
+        hash: generateMockHash()
+      });
+
+      closeAdjudicationModal();
+      renderAllViews();
+
+      alert(`Request ${selectedRequestForModal.id} status updated to: ${newStatus}`);
+    }
+
+    // UTILITY: MOCK CRYPTOGRAPHIC HASH
+    function generateMockHash() {
+      const chars = "abcdef0123456789";
+      let hash = "";
+      for (let i = 0; i < 64; i++) {
+        hash += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return hash;
+    }
+
+    // CHART.JS INITIALIZATION
+    function initCharts() {
+      // Turnaround Trend Chart
+      const ctx1 = document.getElementById('chart-turnaround').getContext('2d');
+      chartTurnaroundInstance = new Chart(ctx1, {
+        type: 'line',
+        data: {
+          labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+          datasets: [
+            {
+              label: 'Legacy Manual Processing (Hours)',
+              data: [5.2, 4.8, 4.5, 4.2],
+              borderColor: '#94a3b8',
+              borderDash: [5, 5],
+              tension: 0.3,
+              fill: false
+            },
+            {
+              label: 'HealthGrid Orchestration (Minutes)',
+              data: [35, 22, 16, 14],
+              borderColor: '#2563eb',
+              backgroundColor: 'rgba(37, 99, 235, 0.1)',
+              tension: 0.3,
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'top', labels: { font: { family: 'Plus Jakarta Sans', size: 11 } } }
+          },
+          scales: {
+            y: { grid: { color: '#f1f5f9' }, ticks: { font: { family: 'Plus Jakarta Sans', size: 10 } } },
+            x: { grid: { display: false }, ticks: { font: { family: 'Plus Jakarta Sans', size: 10 } } }
+          }
+        }
+      });
+
+      // Status Mix Doughnut Chart
+      const ctx2 = document.getElementById('chart-status-mix').getContext('2d');
+      chartStatusMixInstance = new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+          labels: ['Approved', 'Submitted', 'Under Review', 'Info Required'],
+          datasets: [{
+            data: [1, 1, 0, 0],
+            backgroundColor: ['#16a34a', '#2563eb', '#0284c7', '#f59e0b']
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom', labels: { font: { family: 'Plus Jakarta Sans', size: 10 } } }
+          }
+        }
+      });
+    }
+
+    function updateCharts() {
+      if (!chartStatusMixInstance) return;
+
+      const approved = authRequests.filter(r => r.status === 'Approved').length;
+      const submitted = authRequests.filter(r => r.status === 'Submitted').length;
+      const underReview = authRequests.filter(r => r.status === 'Under Review').length;
+      const infoReq = authRequests.filter(r => r.status === 'Info Required').length;
+
+      chartStatusMixInstance.data.datasets[0].data = [approved, submitted, underReview, infoReq];
+      chartStatusMixInstance.update();
+    }
+  </script>
+
+</body>
+</html>
